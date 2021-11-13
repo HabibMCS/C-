@@ -1,0 +1,103 @@
+#include <iostream>
+using namespace std;
+struct Node{
+	int data;
+	Node *next;
+	Node *prev;
+};
+class linkList{
+	private:
+		Node *head;
+		Node *tail;
+	public:
+	linkList(){
+		head = NULL;
+		tail = NULL;
+	
+	}
+		
+	void InNode(int a){
+	Node *Nnode = new Node;
+	
+	
+		Nnode -> data = a;
+		Nnode -> next = NULL;
+		Nnode -> prev = NULL;
+		Node *Trv = head;
+		if(head==NULL)
+		head=Nnode;
+		else{
+			
+		   while(Trv->next != NULL){
+		
+			Trv->next->prev=Trv;
+			Trv=Trv->next;
+		    
+		}
+		Trv->next=Nnode;
+		Nnode->prev=Trv;}}
+	
+    int MoveToFront(int c) {
+      Node* out = head;
+                       //indx of first node is '1'.
+       int i=1,v;
+        do {
+          
+          out->next->prev = out;
+          out=out->next;
+          i++;
+          if(out->data==c)
+         { cout<<c<<" NODE FOUND AT => "<<i<<endl;break;}
+       
+        } while(out->data!=c , out->next!=NULL);
+        if (out->data==c)
+        { 
+  v=1;  
+	
+       
+      Node*temp=head;
+      out->prev->next=out->next;
+      out->next->prev=out->prev;
+      
+      head=out;
+      head->next=temp;
+      head->prev=NULL;
+ 
+		}
+else if(out->data!=c){
+v=0;
+		
+	}
+	return v;  
+}
+	void P_Node(){    
+			Node *ptr=head;
+	          
+		while(ptr!= NULL)
+		{	 cout<<endl<<ptr->data;
+			ptr=ptr->next;	}	}
+};
+int main(){
+	int e;
+	linkList x;
+	x.InNode(11);
+	x.InNode(22);
+	x.InNode(33);
+	x.InNode(55);
+	x.InNode(66);
+	x.InNode(77);
+	x.InNode(88);
+	x.InNode(99);
+	cout<<" LINKED LIST WITHOUT MOVING "<<endl;
+	x.P_Node();    // finds nodes data.
+cout<<"\nGIVE THE NUMBER TO FIND IN THE LIST => ";cin>>e;
+	if (x.MoveToFront(e)==1){
+	cout<<" LINKED LIST WITH MOVING "<<endl;
+	x.MoveToFront(e);
+	x.P_Node();}
+	else if(x.MoveToFront(e)==0){
+	cout<<"\nNODE NOT FOUND LIST , NO CHANGE IN THE LIST";}}
+	
+	
+
+
